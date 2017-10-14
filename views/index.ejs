@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lumen Visual</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <link href="/dist/semantic.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/assets/images/logo.png"/>
+  <style>
+    .centertext{
+      height: 500px;
+      line-height: 500px;
+      text-align: center;
+    }
+    .spancenteredtext {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+    }
+  </style>
+</head>
+<body style="height: 100%">
+<script type="text/javascript" src="/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/dist/semantic.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<meta charset="utf-8">
+<meta name="_token" content="{{ csrf_token() }}">
+<div class="ui container" style="width: 100% ;height: 100%;padding-left:5%;padding-right: 5% ">
+  <div class="ui secondary pointing menu" style="padding: 5px" >
+
+    <div class="left menu">
+      <a class="active item">
+        Home
+      </a>
+
+    </div>
+  </div>
+  <div class="ui container" style="background: #99b9ff;width: 100%;height: 100%; color: white">
+    <div class="centertext">
+      <div class="spancenteredtext">
+          <%if (messages.pesan) { %>
+        <div class="ui red message">
+          <span ><%= messages.pesan %> </span>
+        </div>
+          <% } %>
+        <div class="ui large image">
+          <img id="imgContainer" name="imgContainer" src="/assets/images/default.png">
+        </div>
+        <form class="ui form" action="/images/upload/single" method="post" enctype="multipart/form-data">
+          <div class="field">
+            <label for="file">Select your image Supported files: jpg, jpeg, png :</label>
+            <input type="file" name="imgFile" id="imgFile" accept="image/*" />
+          </div>
+          <div class="field">
+            <button class="ui button blue " type="submit">upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgContainer').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgFile").change(function(){
+            readURL(this);
+        });
+    });
+</script>
+</body>
+</html>
