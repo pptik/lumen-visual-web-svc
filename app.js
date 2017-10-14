@@ -1,10 +1,5 @@
 const express = require('express');
-const moment = require('moment');
 const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const database = require('./database/mongo_connection');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -18,10 +13,6 @@ let app = express();
 /** setup express **/
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 const cors = require('cors');
 
