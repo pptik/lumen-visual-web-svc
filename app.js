@@ -106,4 +106,8 @@ database.connect().then(db =>{
     console.log(err);
 });
 
+process.on('uncaughtException', function(err) {
+    console.log('process.on handler');
+    console.log(err);
+});
 
